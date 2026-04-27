@@ -13,9 +13,10 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="<?= base_url(); ?>" class="logo">LUXE.<span>THREADS</span></a>
-            
+
             <ul class="nav-links">
                 <li><a href="<?= base_url(); ?>" class="active">Home</a></li>
+                <li><a href="<?= base_url('transaksi'); ?>">Transaksi</a></li>
                 <li><a href="#">Men</a></li>
                 <li><a href="#">Women</a></li>
                 <li><a href="#">Collections</a></li>
