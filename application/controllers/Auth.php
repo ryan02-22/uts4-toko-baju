@@ -1,15 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Auth extends CI_Controller
+{
 
-	public function login()
-	{
-		$data['title'] = 'Login - Luxe Threads';
-		$this->load->view('layout/header', $data);
-		$this->load->view('auth/login', $data);
-		$this->load->view('layout/footer');
-	}
+    public function login()
+    {
+        $data['title'] = 'Login - Luxe Threads';
+        $this->load->view('layout/header', $data);
+        $this->load->view('auth/login', $data);
+        $this->load->view('layout/footer');
+    }
 
     public function process()
     {
@@ -21,9 +22,9 @@ class Auth extends CI_Controller {
         $this->load->database();
         $query = $this->db->get_where('users', ['email' => $email])->row();
 
-        if($query) {
+        if ($query) {
             // Verifikasi password
-            if(password_verify($password, $query->password) || $password == 'password123') {
+            if (password_verify($password, $query->password) || $password == 'password123') {
                 // Simpan session dengan user_id
                 $this->session->set_userdata([
                     'user_id' => $query->id,
@@ -32,7 +33,13 @@ class Auth extends CI_Controller {
                     'role' => $query->role,
                     'logged_in' => TRUE
                 ]);
-                redirect('shop');
+
+                // Redirect berdasarkan role
+                if ($query->role === 'admin') {
+                    redirect('admin');
+                } else {
+                    redirect('shop');
+                }
             }
         }
 

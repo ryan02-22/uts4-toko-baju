@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -52,6 +52,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'shop';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// ========================================
+// ADMIN ROUTES
+// ========================================
+$route['admin'] = 'admin/index';
+$route['admin/profile'] = 'admin/profile';
+$route['admin/edit_profile'] = 'admin/edit_profile';
+$route['admin/update_profile'] = 'admin/update_profile';
+$route['admin/change_password'] = 'admin/change_password';
+
+// Admin - Transaksi CRUD Routes
+$route['admin/transaksi'] = 'admin/transaksi';
+$route['admin/create_transaksi'] = 'admin/create_transaksi';
+$route['admin/store_transaksi'] = 'admin/store_transaksi';
+$route['admin/view_transaksi/(:any)'] = 'admin/view_transaksi/$1';
+$route['admin/edit_transaksi/(:any)'] = 'admin/edit_transaksi/$1';
+$route['admin/update_transaksi/(:any)'] = 'admin/update_transaksi/$1';
+$route['admin/delete_transaksi/(:any)'] = 'admin/delete_transaksi/$1';
+
+// ========================================
+// CUSTOMER TRANSAKSI ROUTES
+// ========================================
 $route['transaksi'] = 'transaksi';
 $route['transaksi/create'] = 'transaksi/create';
 $route['transaksi/store'] = 'transaksi/store';
