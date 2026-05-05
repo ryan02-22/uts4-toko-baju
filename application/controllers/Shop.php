@@ -3,53 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Shop extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('Product_model');
+	}
+
 	public function index()
 	{
 		$data['title'] = 'Luxe Threads - Premium Online Clothing';
-		$data['products'] = [
-            [
-                'id' => 1,
-                'name' => 'Midnight Velvet Jacket',
-                'price' => 'Rp 850.000',
-                'image' => 'jacket.jpg',
-                'category' => 'Outerwear'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Classic Oxford Shirt',
-                'price' => 'Rp 450.000',
-                'image' => 'shirt.jpg',
-                'category' => 'Tops'
-            ],
-            [
-                'id' => 3,
-                'name' => 'Urban Cargo Pants',
-                'price' => 'Rp 550.000',
-                'image' => 'pants.jpg',
-                'category' => 'Bottoms'
-            ],
-            [
-                'id' => 4,
-                'name' => 'Silk Elegance Dress',
-                'price' => 'Rp 1.200.000',
-                'image' => 'dress.jpg',
-                'category' => 'Dresses'
-            ],
-            [
-                'id' => 5,
-                'name' => 'Vintage Denim Jacket',
-                'price' => 'Rp 750.000',
-                'image' => 'denim.jpg',
-                'category' => 'Outerwear'
-            ],
-            [
-                'id' => 6,
-                'name' => 'Cozy Knit Sweater',
-                'price' => 'Rp 350.000',
-                'image' => 'sweater.jpg',
-                'category' => 'Tops'
-            ]
-        ];
+		$products = $this->Product_model->get_all();
+		
+		// Format price to match the previous string format expected by the view
+		foreach ($products as &$product) {
+			$product['price'] = 'Rp ' . number_format($product['price'], 0, ',', '.');
+			// fallback image if empty
+			if (empty($product['image'])) {
+				$product['image'] = 'default.jpg';
+			}
+		}
+		$data['products'] = $products;
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('shop/index', $data);

@@ -2,7 +2,3 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
-
-# Biarkan file static diakses langsung
-RewriteCond %{REQUEST_URI} !^/uts4-toko-baju/assets/
-RewriteRule ^assets/(.*)$ assets/$1 [L]

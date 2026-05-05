@@ -38,7 +38,7 @@
                 <div class="product-overlay">
                     <button class="btn-icon" title="Add to Wishlist"><i class="far fa-heart"></i></button>
                     <button class="btn-quickview">Quick View</button>
-                    <button class="btn-icon" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                    <a href="<?= base_url('cart/add/'.$product['id']); ?>" class="btn-icon" title="Add to Cart"><i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
             <div class="product-info">

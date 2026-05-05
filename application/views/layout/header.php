@@ -13,10 +13,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="<?= base_url(); ?>" class="logo">LUXE.<span>THREADS</span></a>
-
+            
             <ul class="nav-links">
                 <li><a href="<?= base_url(); ?>" class="active">Home</a></li>
-                <li><a href="<?= base_url('transaksi'); ?>">Transaksi</a></li>
                 <li><a href="#">Men</a></li>
                 <li><a href="#">Women</a></li>
                 <li><a href="#">Collections</a></li>
@@ -24,8 +23,11 @@
 
             <div class="nav-actions">
                 <a href="#" class="icon-link" title="Search"><i class="fas fa-search"></i></a>
-                <a href="#" class="icon-link" title="Cart"><i class="fas fa-shopping-bag"></i><span class="badge">0</span></a>
+                <a href="<?= base_url('cart'); ?>" class="icon-link" title="Cart"><i class="fas fa-shopping-bag"></i><span class="badge"><?= $this->cart->total_items(); ?></span></a>
                 <?php if($this->session->userdata('logged_in')): ?>
+                    <?php if($this->session->userdata('role') === 'admin' || $this->session->userdata('user') === 'admin@luxethreads.com'): ?>
+                        <a href="<?= base_url('products'); ?>" class="btn-primary-outline" style="border-color: #333; color: #333;"><i class="fas fa-box"></i> Manage Products</a>
+                    <?php endif; ?>
                     <a href="<?= base_url('auth/logout'); ?>" class="btn-primary-outline"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 <?php else: ?>
                     <a href="<?= base_url('auth/login'); ?>" class="btn-primary-outline"><i class="fas fa-user"></i> Login</a>
